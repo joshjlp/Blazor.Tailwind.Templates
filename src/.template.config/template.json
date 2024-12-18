@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Obaki102",
+  "classifications": [
+    "Blazor",
+    "Web",
+    "Wasm"
+  ],
+  "name": "Blazor Tailwind Templates",
+  "description": "Blazor template using Tailwind CSS",
+  "identity": "Blazor.Tailwind.Templates",
+  "groupIdentity": "Blazor.Tailwind.Templates",
+  "shortName": "blazortailwind",
+  "defaultName": "BlazorTailwindTemplates",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "BlazorTailwindApp",
+  "preferNameDirectory": false,
+  "symbols": {
+    "Host": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "Webapp-Wasm",
+      "choices": [
+        {
+          "choice": "Webapp-Wasm",
+          "description": "Blazor WebAssembly"
+        }
+      ]
+    },
+    "IsWebAppWasm": {
+      "type": "computed",
+      "value": "(Host == \"Webapp-Wasm\""
+    },
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips the automatic restore of the project on create.",
+      "defaultValue": "false"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "./"
+    }
+  ],
+  "sources": [
+    {
+      "source": "./.template.base/webapp-wasm",
+      "target": "./"
+    },
+    {
+      "condition": "(IsWebAppWasm)",
+      "source": "./.template.base/webapp-wasm",
+      "target": "./"
+    }
+  ],
+  "SpecialCustomOperations": {
+    "**/*.razor": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": [
+              "//#if"
+            ],
+            "else": [
+              "//#else"
+            ],
+            "elseif": [
+              "//#elseif"
+            ],
+            "endif": [
+              "//#endif"
+            ],
+            "trim": true,
+            "wholeLine": true,
+            "evaluator": "C++"
+          }
+        }
+      ]
+    },
+    "**/*.html": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": [
+              "//#if"
+            ],
+            "else": [
+              "//#else"
+            ],
+            "elseif": [
+              "//#elseif"
+            ],
+            "endif": [
+              "//#endif"
+            ],
+            "trim": true,
+            "wholeLine": true,
+            "evaluator": "C++"
+          }
+        }
+      ]
+    }
+  },
+  "postActions": [
+    {
+      "condition": "(!skipRestore)",
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}
