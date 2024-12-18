@@ -23,5 +23,5 @@ jobs:
     - name: Pack
       run: dotnet pack ./src/Templates.csproj --configuration Release /p:Version=${VERSION} --no-build --output .
     - name: Push Nuget Package
-      run: dotnet nuget push Obaki.Templates.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push Blazor.Tailwind.Templates.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
     
