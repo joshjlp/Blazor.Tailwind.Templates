@@ -9,7 +9,7 @@
     <Version>0.0.1</Version>
     <PackageIcon>Nuget.png</PackageIcon>
     <PackageType>Template</PackageType>
-    <PackageId>Obaki.Templates</PackageId>
+    <PackageId>Blazor.Tailwind.Templates</PackageId>
     <PackageTags>Blazor,Wasm,Tailwind, Web App </PackageTags>
 
     <Company>Obaki</Company>
