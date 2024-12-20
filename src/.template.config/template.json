@@ -22,6 +22,7 @@
     "Host": {
       "type": "parameter",
       "datatype": "choice",
+      "description": "The target host for the blazor app.",
       "defaultValue": "Webapp-Wasm",
       "choices": [
         {
@@ -32,7 +33,35 @@
     },
     "IsWebAppWasm": {
       "type": "computed",
-      "value": "(Host == \"Webapp-Wasm\""
+      "value": "(Host == \"Webapp-Wasm\")"
+    },
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "displayName": ".NET 8",
+          "description": "Target .NET 8 only",
+          "choice": "net8.0"
+        },
+        {
+          "displayName": ".NET 9",
+          "description": "Target .NET 9 only",
+          "choice": "net9.0"
+        },
+        {
+          "displayName": ".NET 8 and .NET 9",
+          "description": "Target both .NET 8 and .NET 9",
+          "choice": "net8.0;net9.0"
+        }
+      ],
+      "defaultValue": "net8.0",
+      "replaces": "{TargetFramework}"
+    },
+    "IsMultiTarget": {
+      "type": "computed",
+      "value": "(Framework == \"net8.0;net9.0\")"
     },
     "skipRestore": {
       "type": "parameter",
@@ -49,12 +78,18 @@
   "sources": [
     {
       "source": "./.template.base/webapp-wasm",
-      "target": "./"
+      "target": "./",
+      "include": ["**/*"],
+      "exclude": ["**/bin/**", "**/obj/**"],
+      "copyOnly": []
     },
     {
       "condition": "(IsWebAppWasm)",
       "source": "./.template.base/webapp-wasm",
-      "target": "./"
+      "target": "./",
+      "include": ["**/*"],
+      "exclude": ["**/bin/**", "**/obj/**"],
+      "copyOnly": []
     }
   ],
   "SpecialCustomOperations": {

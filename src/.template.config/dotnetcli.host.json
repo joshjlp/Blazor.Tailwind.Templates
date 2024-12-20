@@ -4,6 +4,9 @@
     {
         "Host": {
             "longName": "host"
+        },
+        "Framework": {
+            "longName": "framework"
         }
     }
 }

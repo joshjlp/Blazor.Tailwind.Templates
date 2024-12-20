@@ -1,18 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <Import Project="TailwindIntegration.targets" />
+
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <!--#if (!IsMultiTarget) -->
+    <TargetFramework>{TargetFramework}</TargetFramework>
+    <!--#endif-->
+    <!--#if (IsMultiTarget) -->
+    <TargetFrameworks>{TargetFramework}</TargetFrameworks>
+    <!--#endif-->
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TailwindCssInput>wwwroot\css\app.css</TailwindCssInput>
     <TailwindCssOutput>wwwroot\css\app.out.css</TailwindCssOutput>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"
-      Version="9.0.0" PrivateAssets="all" />
+  <!--#if (IsMultiTarget || Framework == "net8.0") -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.*" PrivateAssets="all" />
   </ItemGroup>
+  <!--#endif-->
 
+  <!--#if (IsMultiTarget || Framework == "net9.0") -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0-*" PrivateAssets="all" />
+  </ItemGroup>
+  <!--#endif-->
 </Project>

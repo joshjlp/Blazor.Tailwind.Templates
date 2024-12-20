@@ -9,3 +9,18 @@ dotnet new install Blazor.Tailwind.Templates
 ### Usage
 ```
 dotnet new blazortailwind --host webapp-wasm -o MyApplication
+```
+### Usage with Framework
+To specify the framework, use the `--framework` option. You can use `.net8.0`, `net9.0`, or both `.net8.0;.net9.0`.
+
+```
+dotnet new blazortailwind --host webapp-wasm --framework net8.0 -o MyApplication
+```
+
+```
+dotnet new blazortailwind --host webapp-wasm --framework net9.0 -o MyApplication
+```
+
+```
+dotnet new blazortailwind --host webapp-wasm --framework "net8.0;net9.0" -o MyApplication
+```
