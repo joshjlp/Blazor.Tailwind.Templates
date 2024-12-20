@@ -4,7 +4,8 @@
   "classifications": [
     "Blazor",
     "Web",
-    "Wasm"
+    "Wasm",
+    "Tailwind"
   ],
   "name": "Blazor Tailwind Templates",
   "description": "Blazor template using Tailwind CSS",
@@ -23,17 +24,17 @@
       "type": "parameter",
       "datatype": "choice",
       "description": "The target host for the blazor app.",
-      "defaultValue": "Webapp-Wasm",
+      "defaultValue": "wasm",
       "choices": [
         {
-          "choice": "Webapp-Wasm",
+          "choice": "wasm",
           "description": "Blazor WebAssembly"
         }
       ]
     },
-    "IsWebAppWasm": {
+    "IsWasm": {
       "type": "computed",
-      "value": "(Host == \"Webapp-Wasm\")"
+      "value": "(Host == \"wasm\")"
     },
     "Framework": {
       "type": "parameter",
@@ -77,15 +78,15 @@
   ],
   "sources": [
     {
-      "source": "./.template.base/webapp-wasm",
+      "source": "./.template.base/wasm",
       "target": "./",
       "include": ["**/*"],
       "exclude": ["**/bin/**", "**/obj/**"],
       "copyOnly": []
     },
     {
-      "condition": "(IsWebAppWasm)",
-      "source": "./.template.base/webapp-wasm",
+      "condition": "(IsWasm)",
+      "source": "./.template.base/wasm",
       "target": "./",
       "include": ["**/*"],
       "exclude": ["**/bin/**", "**/obj/**"],

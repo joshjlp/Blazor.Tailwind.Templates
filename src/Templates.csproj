@@ -36,6 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include=".template.base\webapp-wasm\" />
+    <Folder Include=".template.base\wasm\" />
   </ItemGroup>
 </Project>
