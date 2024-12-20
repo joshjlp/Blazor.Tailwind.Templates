@@ -14,15 +14,25 @@
     <TailwindCssOutput>wwwroot\css\app.out.css</TailwindCssOutput>
   </PropertyGroup>
 
-  <!--#if (IsMultiTarget || Framework == "net8.0") -->
+  <!--#if (IsMultiTarget) -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.*" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.*" PrivateAssets="all" />
   </ItemGroup>
-  <!--#endif-->
-
-  <!--#if (IsMultiTarget || Framework == "net9.0") -->
+  
   <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0-*" PrivateAssets="all" />
+  </ItemGroup>
+  <!--#endif-->
+  <!--#if (!IsMultiTarget && Framework == "net8.0") -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.*" PrivateAssets="all" />
+  </ItemGroup>
+  <!--#endif-->
+  <!--#if (!IsMultiTarget && Framework == "net9.0") -->
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-*" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0-*" PrivateAssets="all" />
   </ItemGroup>
