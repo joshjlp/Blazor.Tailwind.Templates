@@ -23,18 +23,42 @@
     "Host": {
       "type": "parameter",
       "datatype": "choice",
-      "description": "The target host for the blazor app.",
+      "description": "The target host for the Blazor app.",
       "defaultValue": "wasm",
       "choices": [
         {
           "choice": "wasm",
-          "description": "Blazor WebAssembly"
+          "description": "Runs in the browser using WebAssembly"
+        },
+        {
+          "choice": "auto",
+          "description": "Blazor Auto Interactivity"
+        },
+        {
+          "choice": "server",
+          "description": "Uses Server while downloading WebAssembly assets, then uses WebAssembly"
+        },
+        {
+          "choice": "none",
+          "description": "No interactivity (static server rendering only)"
         }
       ]
     },
-    "IsWasm": {
+    "IsHostWasm": {
       "type": "computed",
       "value": "(Host == \"wasm\")"
+    },
+    "IsHostAuto": {
+      "type": "computed",
+      "value": "(Host == \"auto\")"
+    },
+    "IsHostServer": {
+      "type": "computed",
+      "value": "(Host == \"server\")"
+    },
+    "IsHostNone": {
+      "type": "computed",
+      "value": "(Host == \"none\")"
     },
     "Framework": {
       "type": "parameter",
@@ -58,7 +82,8 @@
         }
       ],
       "defaultValue": "net8.0",
-      "replaces": "{TargetFramework}"
+      "replaces": "{TargetFramework}",
+      "condition": "(Host == \"wasm\")"
     },
     "IsMultiTarget": {
       "type": "computed",
@@ -78,18 +103,55 @@
   ],
   "sources": [
     {
+      "condition": "(IsHostWasm)",
       "source": "./.template.base/wasm",
       "target": "./",
-      "include": ["**/*"],
-      "exclude": ["**/bin/**", "**/obj/**"],
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/bin/**",
+        "**/obj/**"
+      ],
       "copyOnly": []
     },
     {
-      "condition": "(IsWasm)",
-      "source": "./.template.base/wasm",
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/auto",
       "target": "./",
-      "include": ["**/*"],
-      "exclude": ["**/bin/**", "**/obj/**"],
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/bin/**",
+        "**/obj/**"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostServer)",
+      "source": "./.template.base/server",
+      "target": "./",
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/bin/**",
+        "**/obj/**"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostNone)",
+      "source": "./.template.base/none",
+      "target": "./",
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/bin/**",
+        "**/obj/**"
+      ],
       "copyOnly": []
     }
   ],
@@ -153,6 +215,17 @@
         }
       ],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "condition": "(Host != \"wasm\")",
+      "description": "Framework selection is only applicable when the Host is 'wasm'.",
+      "manualInstructions": [
+        {
+          "text": "Note: The 'Framework' option is only relevant when 'Host' is set to 'wasm'. Other hosts will not use this option.The feature is currently under development and will be available soon."
+        }
+      ],
+      "actionId": "F2A71F9B-5D33-465A-A702-920D77279786",
       "continueOnError": true
     }
   ]
