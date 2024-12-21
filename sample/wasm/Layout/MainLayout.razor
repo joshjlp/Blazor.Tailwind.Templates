@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <aside class="sidebar bg-gradient-to-b from-blue-900 to-purple-900">
+        <NavMenu />
+    </aside>
+
+    <main class="flex-1">
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank" class="hover:underline whitespace-nowrap">
+                About
+            </a>
+        </div>
+
+        <article class="content px-4 mt-4">
+            @Body
+        </article>
+    </main>
+</div>
