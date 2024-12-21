@@ -54,3 +54,7 @@ dotnet new blazortailwind --host wasm --framework net9.0 -o MyApplication
 ```sh
 dotnet new blazortailwind --host wasm --framework "net8.0;net9.0" -o MyApplication
 ```
+
+### Sample Site
+
+You can view a sample site created with these templates [here](https://obaki102.github.io/Blazor.Tailwind.Templates/).
