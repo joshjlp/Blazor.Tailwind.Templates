@@ -109,15 +109,77 @@
   ],
   "sources": [
     {
-      "condition": "(IsHostAuto)",
-      "source": "./.template.base/auto",
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/root",
       "target": "./",
       "include": [
         "**/*"
       ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/wwwroot",
+      "target": "./wwwroot",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/components",
+      "target": "./Components",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/shared/root",
+      "target": "./BlazorTailwindApp",
+      "include": [
+        "**/*"
+      ],
       "exclude": [
-        "**/bin/**",
-        "**/obj/**"
+        ".gitignore"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/shared/wwwroot",
+      "target": "./BlazorTailwindApp/wwwroot",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/shared/components",
+      "target": "./BlazorTailwindApp/Components",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostWasm)",
+      "source": "./.template.base/wasm",
+      "target": "./",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostNone)",
+      "source": "./.template.base/none",
+      "target": "./",
+      "include": [
+        "**/*"
       ],
       "copyOnly": []
     },
@@ -128,67 +190,16 @@
       "include": [
         "**/*"
       ],
-      "exclude": [
-        "**/bin/**",
-        "**/obj/**"
-      ],
       "copyOnly": []
     },
     {
-      "source": "./.template.base/root",
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/auto",
       "target": "./",
       "include": [
         "**/*"
       ],
       "copyOnly": []
-    },
-    {
-      "condition": "(!IsHostWasm)",
-      "source": "./.template.base/wwwroot",
-      "target": "./wwwroot",
-      "include": [
-        "**/*"
-      ],
-      "exclude": [
-        "index.html"
-      ],
-      "copyOnly": []
-    },
-    {
-      "condition": "(IsHostWasm)",
-      "source": "./.template.base/wwwroot",
-      "target": "./wwwroot",
-      "include": [
-        "**/*"
-      ],
-      "copyOnly": []
-    },
-    {
-      "condition": "(!IsHostWasm)",
-      "source": "./.template.base/components",
-      "target": "./Components",
-      "include": [
-        "**/*"
-      ],
-      "copyOnly": []
-    },
-    {
-      "condition": "(IsHostWasm)",
-      "source": "./.template.base/components",
-      "target": "./Components",
-      "include": [
-        "**/*"
-      ],
-      "exclude": [
-        "Routes.razor"
-      ],
-      "copyOnly": []
-    },
-    {
-      "condition": "(ExcludeLaunchSettings)",
-      "exclude": [
-        "/.template.base/root/Properties/launchSettings.json"
-      ]
     }
   ],
   "SpecialCustomOperations": {
@@ -251,17 +262,6 @@
         }
       ],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-      "continueOnError": true
-    },
-    {
-      "condition": "(Interactivity != \"wasm\")",
-      "description": "Framework selection is only applicable when the Interactivity is 'wasm'.",
-      "manualInstructions": [
-        {
-          "text": "Note: The 'Framework' option is only relevant when 'Interactivity' is set to 'wasm'. Other hosts will not use this option.The feature is currently under development and will be available soon."
-        }
-      ],
-      "actionId": "F2A71F9B-5D33-465A-A702-920D77279786",
       "continueOnError": true
     }
   ]
