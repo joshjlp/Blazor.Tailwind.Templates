@@ -20,7 +20,7 @@
   "sourceName": "BlazorTailwindApp",
   "preferNameDirectory": false,
   "symbols": {
-    "Host": {
+    "Interactivity": {
       "type": "parameter",
       "datatype": "choice",
       "description": "The target host for the Blazor app.",
@@ -46,19 +46,19 @@
     },
     "IsHostWasm": {
       "type": "computed",
-      "value": "(Host == \"wasm\")"
+      "value": "(Interactivity == \"wasm\")"
     },
     "IsHostAuto": {
       "type": "computed",
-      "value": "(Host == \"auto\")"
+      "value": "(Interactivity == \"auto\")"
     },
     "IsHostServer": {
       "type": "computed",
-      "value": "(Host == \"server\")"
+      "value": "(Interactivity == \"server\")"
     },
     "IsHostNone": {
       "type": "computed",
-      "value": "(Host == \"none\")"
+      "value": "(Interactivity == \"none\")"
     },
     "Framework": {
       "type": "parameter",
@@ -83,7 +83,7 @@
       ],
       "defaultValue": "net8.0",
       "replaces": "{TargetFramework}",
-      "condition": "(Host == \"wasm\")"
+      "condition": "(Interactivity == \"wasm\")"
     },
     "IsMultiTarget": {
       "type": "computed",
@@ -94,6 +94,12 @@
       "datatype": "bool",
       "description": "If specified, skips the automatic restore of the project on create.",
       "defaultValue": "false"
+    },
+    "ExcludeLaunchSettings": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Exclude launchSettings.json from the generated template."
     }
   },
   "primaryOutputs": [
@@ -103,41 +109,68 @@
   ],
   "sources": [
     {
-      "condition": "(IsHostWasm)",
-      "source": "./.template.base/wasm",
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/root",
       "target": "./",
       "include": [
         "**/*"
       ],
-      "exclude": [
-        "**/bin/**",
-        "**/obj/**"
+      "copyOnly": []
+    },
+    {
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/wwwroot",
+      "target": "./wwwroot",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(!IsHostAuto)",
+      "source": "./.template.base/shared/components",
+      "target": "./Components",
+      "include": [
+        "**/*"
       ],
       "copyOnly": []
     },
     {
       "condition": "(IsHostAuto)",
-      "source": "./.template.base/auto",
-      "target": "./",
+      "source": "./.template.base/shared/root",
+      "target": "./BlazorTailwindApp",
       "include": [
         "**/*"
       ],
       "exclude": [
-        "**/bin/**",
-        "**/obj/**"
+        ".gitignore"
       ],
       "copyOnly": []
     },
     {
-      "condition": "(IsHostServer)",
-      "source": "./.template.base/server",
-      "target": "./",
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/shared/wwwroot",
+      "target": "./BlazorTailwindApp/wwwroot",
       "include": [
         "**/*"
       ],
-      "exclude": [
-        "**/bin/**",
-        "**/obj/**"
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/shared/components",
+      "target": "./BlazorTailwindApp/Components",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostWasm)",
+      "source": "./.template.base/wasm",
+      "target": "./",
+      "include": [
+        "**/*"
       ],
       "copyOnly": []
     },
@@ -148,9 +181,23 @@
       "include": [
         "**/*"
       ],
-      "exclude": [
-        "**/bin/**",
-        "**/obj/**"
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostServer)",
+      "source": "./.template.base/server",
+      "target": "./",
+      "include": [
+        "**/*"
+      ],
+      "copyOnly": []
+    },
+    {
+      "condition": "(IsHostAuto)",
+      "source": "./.template.base/auto",
+      "target": "./",
+      "include": [
+        "**/*"
       ],
       "copyOnly": []
     }
@@ -215,17 +262,6 @@
         }
       ],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-      "continueOnError": true
-    },
-    {
-      "condition": "(Host != \"wasm\")",
-      "description": "Framework selection is only applicable when the Host is 'wasm'.",
-      "manualInstructions": [
-        {
-          "text": "Note: The 'Framework' option is only relevant when 'Host' is set to 'wasm'. Other hosts will not use this option.The feature is currently under development and will be available soon."
-        }
-      ],
-      "actionId": "F2A71F9B-5D33-465A-A702-920D77279786",
       "continueOnError": true
     }
   ]

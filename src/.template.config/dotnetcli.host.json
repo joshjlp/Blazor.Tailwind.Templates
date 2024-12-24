@@ -2,8 +2,8 @@
     "$schema": "http://json.schemastore.org/dotnetcli.host",
     "symbolInfo":
     {
-        "Host": {
-            "longName": "host"
+        "Interactivity": {
+            "longName": "interactivity"
         },
         "Framework": {
             "longName": "framework"
